@@ -15,14 +15,7 @@ let boxes = "";
 button.addEventListener("click", function(){
     changeGrid();
 })
-//If user pressed on the reset button, remove the paint
-reset.addEventListener("click", () =>{
-    //Select the individual boxes since theyre in a nodeList
-    let eachBox = document.querySelectorAll(".box");
-    eachBox.forEach(box =>
-        box.classList.remove("drawing")
-    )
-})
+
 //Create a function to dispay the grid
 function createGrid(grid){
     //nested for loop to create the rows and boxes
@@ -37,9 +30,8 @@ function createGrid(grid){
         box.style.height = `${700 / grid}px`;
         newRows.appendChild(box).className = "box";
         }}
-    //Select the individual boxes since theyre in a nodeList
-    let eachBox = document.querySelectorAll(".box");
     //Add an event listener when the curser hovers over the box and change its color
+    let eachBox = document.querySelectorAll(".box");
     eachBox.forEach(box =>
         box.addEventListener("mouseover", () =>{
             box.classList.add("drawing");
@@ -54,10 +46,15 @@ function createGrid(grid){
             }) 
         )
     })
-}
-//Function to get the color for hue
-function rgbRainbow(max){
-    let number = Math.floor(Math.random() * max);
+    //If user pressed on the reset button, remove the paint
+    reset.addEventListener("click", () =>{
+        //Select the individual boxes since theyre in a nodeList
+        let eachBox = document.querySelectorAll(".box");
+        eachBox.forEach((box)=>{
+            box.classList.remove("drawing");
+            box.style.removeProperty("background-color");}
+        )
+    })
 }
 //Function to prompt the user for grid size in order to change it
 function changeGrid(){
