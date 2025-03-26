@@ -16,7 +16,7 @@ h1{
     display: flex;
     gap: 10px;
 }
-.change, .reset, .rainbow{
+.change, .reset, .rainbow, .default{
     border: none;
     box-shadow: #F2C3B9 5px 0 10px;
     border-radius: 12px;
