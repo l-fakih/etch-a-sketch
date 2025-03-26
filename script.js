@@ -6,6 +6,7 @@ let button = document.querySelector(".change");
 let reset = document.querySelector(".reset");
 //Select rainbow button
 let rainbow = document.querySelector(".rainbow");
+let defaultt = document.querySelector(".default");
 //Put the rows in a varibale once created
 let newRows = "";
 //Put the boxes in a variable once created
@@ -32,11 +33,15 @@ function createGrid(grid){
         }}
     //Add an event listener when the curser hovers over the box and change its color
     let eachBox = document.querySelectorAll(".box");
-    eachBox.forEach(box =>
-        box.addEventListener("mouseover", () =>{
-            box.classList.add("drawing");
-        }) 
-    )
+    //If user pressed on the default button
+    defaultt.addEventListener("click", ()=>{
+        eachBox.forEach(box =>
+            box.addEventListener("mouseover", () =>{
+                box.style.removeProperty("background-color");
+                box.classList.add("drawing");
+            }) 
+        )
+    })
     //If user pressed on the rainbow button
     rainbow.addEventListener("click", ()=>{
         eachBox.forEach(box =>
