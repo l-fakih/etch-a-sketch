@@ -11,11 +11,13 @@ let defaultt = document.querySelector(".default");
 let newRows = "";
 //Put the boxes in a variable once created
 let boxes = "";
+//Check if mouse is being clicks
+let isMouseDown = false;
 
 //If user pressed on change grid number, ask for the size
-button.addEventListener("click", function(){
-    changeGrid();
-})
+    button.addEventListener("click", function(){
+        changeGrid();
+    })
 
 //Create a function to dispay the grid
 function createGrid(grid){
@@ -31,30 +33,45 @@ function createGrid(grid){
         box.style.height = `${700 / grid}px`;
         newRows.appendChild(box).className = "box";
         }}
-    //Add an event listener when the curser hovers over the box and change its color
+    //Add an event listener to paint only when the user has the mouse clicked
+    //Select all the boxes
     let eachBox = document.querySelectorAll(".box");
+    //When mouse is clicked, turn isMouseDown to true. WHen left, turn it to false
+    document.addEventListener('mousedown', () => isMouseDown = true);
+    document.addEventListener('mouseup', () => isMouseDown = false);
+    // Color cells *only* during hold
+    eachBox.forEach(box => {
+        box.addEventListener('mousemove', () => {
+            if (isMouseDown) {
+                box.classList.add("drawing");
+            }
+        });
+    });
     //If user pressed on the default button
     defaultt.addEventListener("click", ()=>{
-        eachBox.forEach(box =>
-            box.addEventListener("mouseover", () =>{
-                box.style.removeProperty("background-color");
-                box.classList.add("drawing");
+        eachBox.forEach(box =>{
+            box.addEventListener("mousemove", () =>{
+                if(isMouseDown){
+                    box.style.removeProperty("background-color");
+                    box.classList.add("drawing");
+                }
             }) 
-        )
+        })
     })
     //If user pressed on the rainbow button
     rainbow.addEventListener("click", ()=>{
-        eachBox.forEach(box =>
-            box.addEventListener("mouseover", () =>{
-                let number = Math.floor(Math.random() * 359);
-                box.style.backgroundColor = `hsl(${number}, 100%, 80%)`;
+        eachBox.forEach(box =>{
+            box.addEventListener("mousemove", () =>{
+                if (isMouseDown){
+                    let number = Math.floor(Math.random() * 359);
+                    box.style.backgroundColor = `hsl(${number}, 100%, 80%)`;
+                }
+                
             }) 
-        )
+        })
     })
     //If user pressed on the reset button, remove the paint
     reset.addEventListener("click", () =>{
-        //Select the individual boxes since theyre in a nodeList
-        let eachBox = document.querySelectorAll(".box");
         eachBox.forEach((box)=>{
             box.classList.remove("drawing");
             box.style.removeProperty("background-color");}
