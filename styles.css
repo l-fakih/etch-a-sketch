@@ -12,12 +12,6 @@ h1{
     font-size: 60px;
     margin: 0px;
 }
-p{
-    color: #97B3AE;
-    text-shadow:#F2C3B9 3px 0 10px;
-    font-size: 15px;
-    margin: 0px;
-}
 .buttons{
     display: flex;
     gap: 10px;
