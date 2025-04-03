@@ -11,7 +11,7 @@ let defaultt = document.querySelector(".default");
 let newRows = "";
 //Put the boxes in a variable once created
 let boxes = "";
-//Check if mouse is being clicks
+//Check if mouse is being clicked
 let isMouseDown = false;
 
 //If user pressed on change grid number, ask for the size
@@ -45,7 +45,11 @@ function createGrid(grid){
             if (isMouseDown) {
                 box.classList.add("drawing");
             }
-        });
+        })
+        box.addEventListener("click", () =>{
+            box.style.removeProperty("background-color");
+            box.classList.add("drawing");
+        })
     });
     //If user pressed on the default button
     defaultt.addEventListener("click", ()=>{
@@ -56,6 +60,10 @@ function createGrid(grid){
                     box.classList.add("drawing");
                 }
             }) 
+            box.addEventListener("click", () =>{
+                box.style.removeProperty("background-color");
+                box.classList.add("drawing");
+            })
         })
     })
     //If user pressed on the rainbow button
@@ -65,9 +73,12 @@ function createGrid(grid){
                 if (isMouseDown){
                     let number = Math.floor(Math.random() * 359);
                     box.style.backgroundColor = `hsl(${number}, 100%, 80%)`;
-                }
-                
-            }) 
+                }   
+            })
+            box.addEventListener("click", () =>{
+                let number = Math.floor(Math.random() * 359);
+                box.style.backgroundColor = `hsl(${number}, 100%, 80%)`;
+            })
         })
     })
     //If user pressed on the reset button, remove the paint
